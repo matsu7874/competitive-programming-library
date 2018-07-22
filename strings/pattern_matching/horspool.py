@@ -1,31 +1,40 @@
 """
-Shift-And
-オンライン文字列検索アルゴリズム
+horspoolのオンライン文字列検索アルゴリズム
 
+suffix searchでsearch windowの最後の文字に応じたスキップを行う。
+
+- average performance: O(n)
+- worst-case performance: O(nm)
 """
 import unittest
 
 
-def search(pattern, text):
+def search(pattern: str, text:str) -> list:
+    """
+    textからpatternの開始位置を探す。
+    """
     # preprocessing
     n = len(text)
     m = len(pattern)
-    mask = {c: 0 for i, c in enumerate(pattern)}
-    for i,c in enumerate(pattern):
-        mask[c] |= 1 << (i)
+    d = {c: m for c in pattern[:-1]}
+    for i in range(m - 1):
+        d[pattern[i]] = m - 1 - i
 
     # searching
+    pos = 0
     res = []
-    state = 0
-    for pos in range(n):
-        state = ((state << 1) | 1) & mask[text[pos]] if text[pos] in mask else 0
-        if state & 1 << (m - 1):
-            res.append(pos - m + 1)
+    while pos <= n - m:
+        i = m - 1
+        while i >= 0 and text[pos + i] == pattern[i]:
+            i -= 1
+        if i == -1:
+            res.append(pos)
+        pos += d[text[pos + m - 1]] if text[pos + m - 1] in d else m
     return res
 
 
-class TestShiftAnd(unittest.TestCase):
-    def test_shift_and(self):
+class TestHorspool(unittest.TestCase):
+    def test_search(self):
         pattern = 'ac'
         text = 'abcacbbca'
         self.assertEqual(search(pattern, text), [3])

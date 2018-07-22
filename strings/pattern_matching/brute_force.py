@@ -4,7 +4,10 @@
 
 import unittest
 
-def search(pattern, text):
+def search(pattern: str, text:str) -> list:
+    """
+    textからpatternの開始位置を探す。
+    """
     n = len(text)
     m = len(pattern)
     res = []
