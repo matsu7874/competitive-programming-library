@@ -52,9 +52,9 @@ class WeightedUnionFind:
     root_position = 0
 
     def __init__(self, size: int):
+        self.size = size
         # 負の値はルート (集合の代表) で集合の個数
         # 正の値は次の要素を表す
-        self.size = size
         self.parent = [-1] * size
         self.weight = [WeightedUnionFind.root_position] * size
 
