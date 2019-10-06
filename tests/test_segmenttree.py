@@ -2,7 +2,7 @@ import unittest
 import random
 
 
-import data_structure.segmenttree as segmenttree
+import snippets.data_structure.segmenttree as segmenttree
 
 
 def bruteforce(points, lb, ub):
