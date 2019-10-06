@@ -20,6 +20,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install -r requirements.txt
     - name: Lint with flake8
       run: |
         pip install flake8
@@ -31,4 +32,11 @@ jobs:
       run: |
         pip install pytest
         pytest
-        pytest */*.py
+        pytest snippets/*/*.py
+    - name: Docstring coverage
+      run: |
+        pip install doc-cov
+        doccov snippets/ -fmc --output csv > doccov.csv
+        doccov-report doccov.csv
+
+

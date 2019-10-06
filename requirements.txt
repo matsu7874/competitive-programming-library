@@ -1,0 +1,3 @@
+doc-cov==0.4.0
+flake8==3.7.8
+pytest==5.2.0
