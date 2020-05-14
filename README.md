@@ -1,8 +1,8 @@
 # competitive programming snippets
 
 [![](https://github.com/matsu7874/competitive-programming-snippets/workflows/verify/badge.svg)](https://github.com/matsu7874/competitive-programming-snippets/actions)
-[![](https://github.com/matsu7874/competitive-programming-snippets/workflows/type_annotation_check/badge.svg)](https://github.com/matsu7874/competitive-programming-snippets/actions)
-[![Python package](https://github.com/matsu7874/competitive-programming-snippets/workflows/pythonpackage/badge.svg)](https://github.com/matsu7874/competitive-programming-snippets/actions)
+[![test](https://github.com/matsu7874/competitive-programming-snippets/workflows/test/badge.svg)](https://github.com/matsu7874/competitive-programming-snippets/actions)
+[![](https://github.com/matsu7874/competitive-programming-snippets/workflows/style/badge.svg)](https://github.com/matsu7874/competitive-programming-snippets/actions)
 
 - [ ] data structure
     - [ ] stack
