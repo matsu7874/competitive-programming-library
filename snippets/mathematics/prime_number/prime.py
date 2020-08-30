@@ -1,6 +1,64 @@
 import unittest
 
 
+class PrimeFactorization:
+    def __init__(self, upper_limit):
+        _primes, minimam_prime_factor = PrimeFactorization.list_primes(
+            upper_limit)
+        self.minimam_prime_factor = minimam_prime_factor
+
+    def list_primes(upper_limit):
+        # Sieve of Eratosthenes
+        if upper_limit <= 2:
+            return [], [0, 1]
+
+        minimam_prime_factor = [i if i %
+                                2 == 1 else 2 for i in range(upper_limit)]
+        minimam_prime_factor[0] = 0
+        primes = [2]
+        is_prime = [i % 2 == 1 for i in range(upper_limit)]
+        for i in range(3, upper_limit, 2):
+            if not is_prime[i]:
+                continue
+            primes.append(i)
+            for j in range(i*i, upper_limit, i):
+                is_prime[j] = False
+                if minimam_prime_factor[j] == j:
+                    minimam_prime_factor[j] = i
+        return primes, minimam_prime_factor
+
+    def list_prime_factors(self, n) -> set:
+        factors = set()
+        while 1 < n:
+            factors.add(self.minimam_prime_factor[n])
+            n //= self.minimam_prime_factor[n]
+        return factors
+
+
+class TestPrimeFactorization(unittest.TestCase):
+    def test1(self):
+        primes, minimam_prime_factor = PrimeFactorization.list_primes(1)
+        self.assertEqual(primes, [])
+        self.assertEqual(minimam_prime_factor, [0, 1])
+
+    def test2(self):
+        primes, minimam_prime_factor = PrimeFactorization.list_primes(2)
+        self.assertEqual(primes, [])
+        self.assertEqual(minimam_prime_factor, [0, 1])
+
+    def test3(self):
+        primes, minimam_prime_factor = PrimeFactorization.list_primes(3)
+        self.assertEqual(primes, [2])
+        self.assertEqual(minimam_prime_factor, [
+                         0, 1, 2])
+
+    def test20(self):
+        primes, minimam_prime_factor = PrimeFactorization.list_primes(20)
+        self.assertEqual(primes, [2, 3, 5, 7, 11, 13, 17, 19])
+        self.assertEqual(minimam_prime_factor, [
+                         0, 1, 2, 3, 2, 5, 2, 7, 2, 3, 2, 11, 2, 13, 2, 3, 2, 17, 2, 19])
+
+
 def is_prime(n: int) -> bool:
     """
     素数判定
